@@ -76,6 +76,13 @@ class Book(models.Model):
     genre = models.ManyToManyField(
         Genre, help_text="Select a genre for this book")
 
+    def display_genre(self):
+        """
+        Create a string for the Genre, whichis required to display genre in Admin.
+        """
+        return ', '.join(genre.name for genre in self.genre.all()[:3])
+    display_genre.short_description = 'Genre'
+
     def __str__(self):
         """String for representing the Model object."""
         return self.title
@@ -113,6 +120,13 @@ class BookInstance(models.Model):
 
     class Meta:
         ordering = ['due_back']
+
+    def display_title(self):
+        """
+        Create a string for the title, which is required to display title in Admin.
+        """
+        return self.book.title
+    display_title.short_description = 'Title'
 
     def __str__(self):
         """String for representing the Model object."""
