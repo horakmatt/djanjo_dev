@@ -27,13 +27,15 @@ class AuthorAdmin(admin.ModelAdmin):
 admin.site.register(Author, AuthorAdmin)
 
 admin.site.register(Genre)
+
 # admin.site.register(BookInstance)
 @admin.register(BookInstance)
 class BookInstanceAdmin(admin.ModelAdmin):
     list_filter = ('status', 'due_back')
-    list_display = ('display_title', 'id', 'status', 'due_back')
+    list_display = ('book', 'status', 'borrower', 'due_back', 'id')
     fieldsets = (
     (None, {'fields': ('book', 'imprint', 'id')}),
-    ('Availability', {'fields': ('status', 'due_back')}),
+    ('Availability', {'fields': ('status', 'due_back', 'borrower')}),
     )
+
 admin.site.register(Language)
